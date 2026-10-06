@@ -243,7 +243,7 @@ export function PlayGame({ session, quiz, player }: PlayGameProps) {
           <div className="mb-8">
             <div className="flex items-center justify-center gap-3 mb-3">
               <StopWatchIcon className="w-6 h-6" />
-              <span className={`text-3xl font-medium ${timeRemaining <= 5 ? 'text-[hsl(var(--answer-red))]' : ''}`}>
+              <span className={`font-heading text-3xl font-medium ${timeRemaining <= 5 ? 'text-[hsl(var(--answer-red))]' : ''}`}>
                 {timeRemaining}s
               </span>
             </div>

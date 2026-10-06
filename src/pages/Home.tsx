@@ -93,7 +93,7 @@ export function Home({ onCreate, onJoin, onOpenTerms, onOpenPrivacy }: HomeProps
         <div className="container mx-auto px-6 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
             <div>
-              <p className="text-3xl md:text-4xl font-medium text-foreground">
+              <p className="font-heading text-3xl md:text-4xl font-medium text-foreground">
                 13K+
               </p>
               <p className="text-sm text-muted-foreground mt-1">
@@ -101,13 +101,13 @@ export function Home({ onCreate, onJoin, onOpenTerms, onOpenPrivacy }: HomeProps
               </p>
             </div>
             <div>
-              <p className="text-3xl md:text-4xl font-medium text-foreground">
+              <p className="font-heading text-3xl md:text-4xl font-medium text-foreground">
                 4K+
               </p>
               <p className="text-sm text-muted-foreground mt-1">Quiz créés</p>
             </div>
             <div>
-              <p className="text-3xl md:text-4xl font-medium text-foreground">
+              <p className="font-heading text-3xl md:text-4xl font-medium text-foreground">
                 50K+
               </p>
               <p className="text-sm text-muted-foreground mt-1">
@@ -115,7 +115,7 @@ export function Home({ onCreate, onJoin, onOpenTerms, onOpenPrivacy }: HomeProps
               </p>
             </div>
             <div>
-              <p className="text-3xl md:text-4xl font-medium text-foreground">
+              <p className="font-heading text-3xl md:text-4xl font-medium text-foreground">
                 99%
               </p>
               <p className="text-sm text-muted-foreground mt-1">Satisfaction</p>

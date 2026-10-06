@@ -187,7 +187,7 @@ export function GameLobby({ session, quiz, onStart, onBack, isHost }: GameLobbyP
               </CardHeader>
               <CardContent className="space-y-5">
                 <div className="flex flex-col items-center gap-5 text-center">
-                  <div className="text-4xl font-medium tracking-wider text-[hsl(var(--answer-blue))]">
+                  <div className="font-heading text-4xl font-medium tracking-wider text-[hsl(var(--answer-blue))]">
                     {gameCode || '—'}
                   </div>
                   {qrCodeUrl && (

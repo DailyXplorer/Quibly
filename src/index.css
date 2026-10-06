@@ -3,6 +3,59 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "Season Mix";
+  src: url("/fonts/season-mix/SeasonMix-TRIAL-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("/fonts/season-mix/SeasonMix-TRIAL-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("/fonts/season-mix/SeasonMix-TRIAL-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("/fonts/season-mix/SeasonMix-TRIAL-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("/fonts/season-mix/SeasonMix-TRIAL-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("/fonts/season-mix/SeasonMix-TRIAL-Heavy.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "DM Sans Variable", "DM Sans", system-ui, sans-serif;
+  --font-heading: "Season Mix", "DM Sans Variable", "DM Sans", system-ui, sans-serif;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -30,7 +83,7 @@
   --answer-yellow: 48 96% 53%;
   --answer-green: 142 76% 36%;
 
-  font-family: "Cabinet Grotesk", system-ui, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   font-weight: 400;
 
@@ -87,8 +140,6 @@
   --color-answer-yellow: hsl(var(--answer-yellow));
   --color-answer-green: hsl(var(--answer-green));
 
-  --font-sans: "Cabinet Grotesk", system-ui, sans-serif;
-
   --color-sidebar-ring: var(--sidebar-ring);
 
   --color-sidebar-border: var(--sidebar-border);
@@ -136,9 +187,15 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Cabinet Grotesk", system-ui, sans-serif;
+    font-family: var(--font-sans);
     user-select: text;
     -webkit-user-select: text;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
   }
 
   #root,

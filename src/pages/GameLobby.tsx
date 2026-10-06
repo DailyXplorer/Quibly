@@ -4,7 +4,7 @@ import { Button as CustomButton } from '@/components/ui/custom-button'
 import type { GameSession, Player as UiPlayer, Quiz } from '@/types'
 import type { Player as DbPlayer } from '@/lib/supabase'
 import { useSupabase } from '@/hooks/useSupabase'
-import { ArrowLeft01Icon, UserGroupIcon, PlayIcon, Copy01Icon, Tick02Icon } from 'hugeicons-react'
+import { CaretLeftIcon, UsersThreeIcon, PlayIcon, CopyIcon, CheckIcon } from '@phosphor-icons/react'
 import { toDataURL } from 'qrcode'
 import { scheduleScrollToTop } from '@/lib/scroll'
 
@@ -127,7 +127,7 @@ export function GameLobby({ session, quiz, onStart, onBack, isHost }: GameLobbyP
           variant="secondary"
           onClick={onBack}
           className="mb-8"
-          icon={<ArrowLeft01Icon className="w-5 h-5" />}
+          icon={<CaretLeftIcon className="w-5 h-5" />}
         >
           Quitter la partie
         </CustomButton>
@@ -145,7 +145,7 @@ export function GameLobby({ session, quiz, onStart, onBack, isHost }: GameLobbyP
           <Card className="border border-border shadow-sm">
             <CardHeader className="text-center pb-4">
               <CardTitle className="flex items-center justify-center gap-2 text-lg font-medium">
-                <UserGroupIcon className="w-5 h-5" />
+                <UsersThreeIcon className="w-5 h-5" />
                 Joueurs ({players.length})
               </CardTitle>
             </CardHeader>
@@ -205,7 +205,7 @@ export function GameLobby({ session, quiz, onStart, onBack, isHost }: GameLobbyP
                   variant="secondary"
                   onClick={handleCopyCode}
                   className="w-full"
-                  icon={copied ? <Tick02Icon className="w-5 h-5" /> : <Copy01Icon className="w-5 h-5" />}
+                  icon={copied ? <CheckIcon className="w-5 h-5" /> : <CopyIcon className="w-5 h-5" />}
                   disabled={!gameCode}
                 >
                   {copied ? 'Code copié' : 'Copier le code'}

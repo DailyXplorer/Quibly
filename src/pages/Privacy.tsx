@@ -1,4 +1,4 @@
-import { ArrowLeft01Icon, GithubIcon } from 'hugeicons-react'
+import { CaretLeftIcon, GithubLogoIcon } from '@phosphor-icons/react'
 
 import { SiteFooter } from '@/components/SiteFooter'
 import { Button as CustomButton } from '@/components/ui/custom-button'
@@ -33,7 +33,7 @@ export function Privacy({ onBack, onOpenTerms, onOpenPrivacy }: PrivacyProps) {
           </a>
           <CustomButton
             variant="secondary"
-            icon={<GithubIcon className="w-4 h-4" />}
+            icon={<GithubLogoIcon className="w-4 h-4" />}
             onClick={() =>
               window.open(
                 'https://github.com/Louistmg/Quibly',
@@ -52,7 +52,7 @@ export function Privacy({ onBack, onOpenTerms, onOpenPrivacy }: PrivacyProps) {
           <CustomButton
             variant="secondary"
             onClick={onBack}
-            icon={<ArrowLeft01Icon className="w-4 h-4" />}
+            icon={<CaretLeftIcon className="w-4 h-4" />}
             className="mb-8"
           >
             Retour à l'accueil

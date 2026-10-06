@@ -4,7 +4,7 @@ import { Button as CustomButton } from '@/components/ui/custom-button'
 import type { GameSession, Player as UiPlayer } from '@/types'
 import type { Player as DbPlayer } from '@/lib/supabase'
 import { useSupabase } from '@/hooks/useSupabase'
-import { ArrowLeft01Icon } from 'hugeicons-react'
+import { CaretLeftIcon } from '@phosphor-icons/react'
 
 interface ResultsProps {
   session: GameSession | null
@@ -114,7 +114,7 @@ export function Results({ session, onBack }: ResultsProps) {
           <CustomButton
             variant="secondary"
             onClick={onBack}
-            icon={<ArrowLeft01Icon className="w-5 h-5" />}
+            icon={<CaretLeftIcon className="w-5 h-5" />}
           >
             Retour à l'accueil
           </CustomButton>

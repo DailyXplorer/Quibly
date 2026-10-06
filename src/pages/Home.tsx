@@ -10,20 +10,20 @@ import {
 } from "@/components/ui/table";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
-  GameController01Icon,
-  UserGroupIcon,
+  GameControllerIcon,
+  UsersThreeIcon,
   CrownIcon,
-  ArrowRight01Icon,
+  CaretRightIcon,
   PlayIcon,
-  ZapIcon,
-  GithubIcon,
+  LightningIcon,
+  GithubLogoIcon,
   GitPullRequestIcon,
   RocketIcon,
-  CheckmarkCircle02Icon,
-  Cancel01Icon,
-  Download04Icon,
-  InformationCircleIcon,
-} from "hugeicons-react";
+  CheckCircleIcon,
+  XIcon,
+  DownloadSimpleIcon,
+  InfoIcon,
+} from "@phosphor-icons/react";
 import { REPO_URL } from "@/demo";
 
 type HomeActionsProps =
@@ -42,7 +42,7 @@ function HomeActions(props: HomeActionsProps) {
         <CustomButton
           variant="primary"
           onClick={() => window.open(REPO_URL, "_blank", "noopener,noreferrer")}
-          icon={<Download04Icon className="w-4 h-4" />}
+          icon={<DownloadSimpleIcon className="w-4 h-4" />}
           className="w-full sm:w-auto"
         >
           Télécharger le code
@@ -72,7 +72,7 @@ function HomeActions(props: HomeActionsProps) {
       <CustomButton
         variant="secondary"
         onClick={props.onJoin}
-        icon={<ArrowRight01Icon className="w-4 h-4" />}
+        icon={<CaretRightIcon className="w-4 h-4" />}
         className="w-full sm:w-auto"
       >
         Rejoindre une partie
@@ -96,7 +96,7 @@ export function Home(props: HomeProps) {
           </a>
           <CustomButton
             variant="secondary"
-            icon={<GithubIcon className="w-4 h-4" />}
+            icon={<GithubLogoIcon className="w-4 h-4" />}
             onClick={() =>
               window.open(
                 "https://github.com/Louistmg/Quibly",
@@ -114,7 +114,7 @@ export function Home(props: HomeProps) {
         <div className="max-w-2xl md:mx-auto text-left md:text-center">
           {"onStartDemo" in props && (
             <div className="mb-8 inline-flex items-start gap-2 rounded-lg border border-border bg-secondary/40 px-4 py-3 text-left text-sm text-foreground">
-              <InformationCircleIcon className="w-5 h-5 shrink-0 text-[hsl(var(--answer-blue))]" />
+              <InfoIcon className="w-5 h-5 shrink-0 text-[hsl(var(--answer-blue))]" />
               <p>
                 Version de démonstration — téléchargez le code pour héberger
                 votre propre Quibly
@@ -179,7 +179,7 @@ export function Home(props: HomeProps) {
           <Card className="border-border">
             <CardContent className="p-5">
               <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center mb-3">
-                <GameController01Icon className="w-4 h-4" />
+                <GameControllerIcon className="w-4 h-4" />
               </div>
               <h3 className="text-base font-medium mb-1">QCM interactifs</h3>
               <p className="text-sm text-muted-foreground">
@@ -192,7 +192,7 @@ export function Home(props: HomeProps) {
           <Card className="border-border">
             <CardContent className="p-5">
               <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center mb-3">
-                <UserGroupIcon className="w-4 h-4" />
+                <UsersThreeIcon className="w-4 h-4" />
               </div>
               <h3 className="text-base font-medium mb-1">Code de partie</h3>
               <p className="text-sm text-muted-foreground">
@@ -204,7 +204,7 @@ export function Home(props: HomeProps) {
           <Card className="border-border">
             <CardContent className="p-5">
               <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center mb-3">
-                <ZapIcon className="w-4 h-4" />
+                <LightningIcon className="w-4 h-4" />
               </div>
               <h3 className="text-base font-medium mb-1">Chrono & points</h3>
               <p className="text-sm text-muted-foreground">
@@ -259,10 +259,10 @@ export function Home(props: HomeProps) {
                       Sans inscription pour créer
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <Cancel01Icon className="w-5 h-5 text-destructive mx-auto" />
+                      <XIcon className="w-5 h-5 text-destructive mx-auto" />
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <CheckmarkCircle02Icon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
+                      <CheckCircleIcon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -270,10 +270,10 @@ export function Home(props: HomeProps) {
                       Sans inscription pour jouer
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <CheckmarkCircle02Icon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
+                      <CheckCircleIcon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <CheckmarkCircle02Icon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
+                      <CheckCircleIcon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -292,10 +292,10 @@ export function Home(props: HomeProps) {
                       Points personnalisables
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <Cancel01Icon className="w-5 h-5 text-destructive mx-auto" />
+                      <XIcon className="w-5 h-5 text-destructive mx-auto" />
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <CheckmarkCircle02Icon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
+                      <CheckCircleIcon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
                     </TableCell>
                   </TableRow>
                   <TableRow className="border-b-0">
@@ -303,10 +303,10 @@ export function Home(props: HomeProps) {
                       Code source accessible
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <Cancel01Icon className="w-5 h-5 text-destructive mx-auto" />
+                      <XIcon className="w-5 h-5 text-destructive mx-auto" />
                     </TableCell>
                     <TableCell className="text-center py-3 sm:py-4">
-                      <CheckmarkCircle02Icon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
+                      <CheckCircleIcon className="w-5 h-5 text-[hsl(var(--answer-blue))] mx-auto" />
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -325,7 +325,7 @@ export function Home(props: HomeProps) {
           <Card className="border-border">
             <CardContent className="p-5">
               <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center mb-3">
-                <GithubIcon className="w-4 h-4" />
+                <GithubLogoIcon className="w-4 h-4" />
               </div>
               <h3 className="text-base font-medium mb-1">Code source ouvert</h3>
               <p className="text-sm text-muted-foreground">

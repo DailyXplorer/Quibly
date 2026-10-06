@@ -29,7 +29,7 @@ Le lien : [quibly-quiz.vercel.app](https://quibly-quiz.vercel.app/)
 - Suivre son score et le classement final.
 
 ## Tech
-- React 19, Vite, Tailwind CSS v4, shadcn/ui, Huge Icons.
+- React 19, Vite, Tailwind CSS v4, shadcn/ui, Phosphor Icons.
 - Supabase pour la base de données et le temps réel.
 
 ## Développement local

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button as CustomButton } from '@/components/ui/custom-button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { ArrowLeft01Icon, UserIcon, HashtagIcon } from 'hugeicons-react'
+import { CaretLeftIcon, UserIcon, HashIcon } from '@phosphor-icons/react'
 
 interface JoinGameProps {
   onJoin: (code: string, playerName: string) => void
@@ -31,7 +31,7 @@ export function JoinGame({ onJoin, onBack, isLoading, initialCode }: JoinGamePro
           variant="secondary"
           onClick={onBack}
           className="mb-6"
-          icon={<ArrowLeft01Icon className="w-5 h-5" />}
+          icon={<CaretLeftIcon className="w-5 h-5" />}
         >
           Retour
         </CustomButton>
@@ -44,7 +44,7 @@ export function JoinGame({ onJoin, onBack, isLoading, initialCode }: JoinGamePro
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
-                  <HashtagIcon className="w-4 h-4" />
+                  <HashIcon className="w-4 h-4" />
                   <span className="inline-flex items-center gap-1">
                     Code de la partie
                     <span className="text-destructive" aria-hidden="true">*</span>

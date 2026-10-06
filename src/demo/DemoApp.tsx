@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useLayoutEffect, useMemo, useState } from 'react'
-import { ArrowLeft01Icon, ArrowRight01Icon, Download04Icon } from 'hugeicons-react'
+import { CaretLeftIcon, CaretRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react'
 import { Button as CustomButton } from '@/components/ui/custom-button'
 import { DEMO_QUIZ, DemoTourContext, REPO_URL, type DemoTour } from '@/demo'
 import type { GameSession } from '@/types'
@@ -120,7 +120,7 @@ function Tour({ onExit }: { onExit: () => void }) {
               variant="secondary"
               onClick={() => goTo(tour.stepIndex - 1)}
               disabled={tour.stepIndex === 0}
-              icon={<ArrowLeft01Icon className="w-4 h-4" />}
+              icon={<CaretLeftIcon className="w-4 h-4" />}
               className="px-4 sm:px-6"
             >
               Précédent
@@ -129,7 +129,7 @@ function Tour({ onExit }: { onExit: () => void }) {
               <CustomButton
                 variant="primary"
                 onClick={openRepo}
-                icon={<Download04Icon className="w-4 h-4" />}
+                icon={<DownloadSimpleIcon className="w-4 h-4" />}
                 className="px-4 sm:px-6"
               >
                 Télécharger le code
@@ -138,7 +138,7 @@ function Tour({ onExit }: { onExit: () => void }) {
               <CustomButton
                 variant="primary"
                 onClick={() => goTo(tour.stepIndex + 1)}
-                icon={<ArrowRight01Icon className="w-4 h-4" />}
+                icon={<CaretRightIcon className="w-4 h-4" />}
                 className="px-4 sm:px-6"
               >
                 Suivant

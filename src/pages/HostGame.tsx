@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { StopWatchIcon, ArrowRight01Icon, Tick02Icon, ArrowLeft01Icon, FireIcon } from 'hugeicons-react'
+import { TimerIcon, CaretRightIcon, CheckIcon, CaretLeftIcon, FireIcon } from '@phosphor-icons/react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button as CustomButton } from '@/components/ui/custom-button'
 import type { GameSession, Player as UiPlayer, Quiz, Answer } from '@/types'
@@ -230,7 +230,7 @@ export function HostGame({ session, quiz, onQuit }: HostGameProps) {
           <CustomButton
             variant="secondary"
             onClick={onQuit}
-            icon={<ArrowLeft01Icon className="w-4 h-4" />}
+            icon={<CaretLeftIcon className="w-4 h-4" />}
           >
             Quitter la partie
           </CustomButton>
@@ -243,7 +243,7 @@ export function HostGame({ session, quiz, onQuit }: HostGameProps) {
             {currentQuestion.text}
           </h1>
           <div className="flex items-center justify-center gap-3 text-muted-foreground">
-            <StopWatchIcon className="w-5 h-5" />
+            <TimerIcon className="w-5 h-5" />
             <span className="text-lg font-medium">{timeRemaining}s</span>
             <span className="text-sm">·</span>
             <span className="text-sm">{totalAnswers}/{totalPlayers} réponses</span>
@@ -311,7 +311,7 @@ export function HostGame({ session, quiz, onQuit }: HostGameProps) {
                           <p className="text-sm text-muted-foreground">{answer.count} réponse(s)</p>
                           {isCorrect && (
                             <span className="inline-flex items-center gap-1 text-sm text-[hsl(var(--answer-green))]">
-                              <Tick02Icon className="w-4 h-4" />
+                              <CheckIcon className="w-4 h-4" />
                               Bonne réponse
                             </span>
                           )}
@@ -326,7 +326,7 @@ export function HostGame({ session, quiz, onQuit }: HostGameProps) {
                 <CustomButton
                   variant="primary"
                   onClick={handleShowScoreboard}
-                  icon={<ArrowRight01Icon className="w-5 h-5" />}
+                  icon={<CaretRightIcon className="w-5 h-5" />}
                 >
                   Afficher le classement
                 </CustomButton>
@@ -385,7 +385,7 @@ export function HostGame({ session, quiz, onQuit }: HostGameProps) {
                   <CustomButton
                     variant="primary"
                     onClick={handleFinishGame}
-                    icon={<ArrowRight01Icon className="w-5 h-5" />}
+                    icon={<CaretRightIcon className="w-5 h-5" />}
                   >
                     Terminer la partie
                   </CustomButton>
@@ -393,7 +393,7 @@ export function HostGame({ session, quiz, onQuit }: HostGameProps) {
                   <CustomButton
                     variant="primary"
                     onClick={handleNextQuestion}
-                    icon={<ArrowRight01Icon className="w-5 h-5" />}
+                    icon={<CaretRightIcon className="w-5 h-5" />}
                   >
                     Question suivante
                   </CustomButton>

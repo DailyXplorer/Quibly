@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
-import { StopWatchIcon, CrownIcon, Tick02Icon, Cancel02Icon, FireIcon } from 'hugeicons-react'
+import { TimerIcon, CrownIcon, CheckIcon, XIcon, FireIcon } from '@phosphor-icons/react'
 import { GameSession, Quiz, Player, Question, Answer } from '@/types'
 import type { Player as DbPlayer } from '@/lib/supabase'
 import { useSupabase } from '@/hooks/useSupabase'
@@ -242,7 +242,7 @@ export function PlayGame({ session, quiz, player }: PlayGameProps) {
         <>
           <div className="mb-8">
             <div className="flex items-center justify-center gap-3 mb-3">
-              <StopWatchIcon className="w-6 h-6" />
+              <TimerIcon className="w-6 h-6" />
               <span className={`font-heading text-3xl font-medium ${timeRemaining <= 5 ? 'text-[hsl(var(--answer-red))]' : ''}`}>
                 {timeRemaining}s
               </span>
@@ -299,13 +299,13 @@ export function PlayGame({ session, quiz, player }: PlayGameProps) {
                     
                     {showResult && isCorrect && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <Tick02Icon className="w-12 h-12 text-white/80" />
+                        <CheckIcon className="w-12 h-12 text-white/80" />
                       </div>
                     )}
                     
                     {showResult && isSelected && !isCorrect && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-2xl">
-                        <Cancel02Icon className="w-12 h-12 text-white/80" />
+                        <XIcon className="w-12 h-12 text-white/80" />
                       </div>
                     )}
                   </button>
@@ -320,22 +320,22 @@ export function PlayGame({ session, quiz, player }: PlayGameProps) {
         <div className="text-center mt-8 space-y-4">
           {submissionError ? (
             <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-6 py-3 rounded-full font-medium text-lg">
-              <Cancel02Icon className="w-6 h-6" />
+              <XIcon className="w-6 h-6" />
               {submissionError}
             </div>
           ) : !hasSelectedAnswer ? (
             <div className="inline-flex items-center gap-2 bg-white/20 text-white px-6 py-3 rounded-full font-medium text-xl">
-              <StopWatchIcon className="w-6 h-6" />
+              <TimerIcon className="w-6 h-6" />
               Temps écoulé
             </div>
           ) : isAnswerCorrect ? (
             <div className="inline-flex items-center gap-2 bg-[hsl(var(--answer-green))] text-white px-6 py-3 rounded-full font-medium text-xl">
-              <Tick02Icon className="w-6 h-6" />
+              <CheckIcon className="w-6 h-6" />
               Bonne réponse ! +{pointsEarned} pts
             </div>
           ) : (
             <div className="inline-flex items-center gap-2 bg-[hsl(var(--answer-red))] text-white px-6 py-3 rounded-full font-medium text-xl">
-              <Cancel02Icon className="w-6 h-6" />
+              <XIcon className="w-6 h-6" />
               Mauvaise réponse
             </div>
           )}

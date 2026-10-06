@@ -6,13 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Question, Quiz, Answer } from '@/types'
 import {
-  ArrowLeft01Icon,
-  PlusSignIcon,
-  Delete02Icon,
-  Tick02Icon,
-  Clock01Icon,
+  CaretLeftIcon,
+  PlusIcon,
+  TrashIcon,
+  CheckIcon,
+  ClockIcon,
   CrownIcon
-} from 'hugeicons-react'
+} from '@phosphor-icons/react'
 import { v4 as uuidv4 } from 'uuid'
 
 interface CreateQuizProps {
@@ -330,7 +330,7 @@ export function CreateQuiz({ onSubmit, onBack, isLoading }: CreateQuizProps) {
           <CustomButton
             variant="secondary"
             onClick={handleBack}
-            icon={<ArrowLeft01Icon className="w-5 h-5" />}
+            icon={<CaretLeftIcon className="w-5 h-5" />}
           >
             Retour
           </CustomButton>
@@ -404,7 +404,7 @@ export function CreateQuiz({ onSubmit, onBack, isLoading }: CreateQuizProps) {
                   onClick={resetEditor}
                   className="hover:bg-muted"
                 >
-                  <PlusSignIcon className="w-4 h-4" />
+                  <PlusIcon className="w-4 h-4" />
                 </Button>
               </CardHeader>
               <CardContent className="flex h-full flex-col gap-4">
@@ -448,7 +448,7 @@ export function CreateQuiz({ onSubmit, onBack, isLoading }: CreateQuizProps) {
                               className="text-destructive hover:text-destructive hover:bg-destructive/10"
                               aria-label="Supprimer la question"
                             >
-                              <Delete02Icon className="w-4 h-4" />
+                              <TrashIcon className="w-4 h-4" />
                             </Button>
                           </div>
                         )
@@ -490,7 +490,7 @@ export function CreateQuiz({ onSubmit, onBack, isLoading }: CreateQuizProps) {
                   onClick={handleSaveQuestion}
                   className="w-full h-10 px-4 text-sm sm:w-auto"
                   disabled={!isCurrentComplete}
-                  icon={<PlusSignIcon className="w-4 h-4" />}
+                  icon={<PlusIcon className="w-4 h-4" />}
                 >
                   {selectedQuestionId ? 'Mettre à jour' : 'Ajouter'}
                 </CustomButton>
@@ -550,7 +550,7 @@ export function CreateQuiz({ onSubmit, onBack, isLoading }: CreateQuizProps) {
                           aria-pressed={answer.isCorrect}
                           aria-label="Définir comme bonne réponse"
                         >
-                          {answer.isCorrect ? <Tick02Icon className="w-4 h-4" /> : '✓'}
+                          {answer.isCorrect ? <CheckIcon className="w-4 h-4" /> : '✓'}
                         </button>
                       </div>
                       <Input
@@ -603,7 +603,7 @@ export function CreateQuiz({ onSubmit, onBack, isLoading }: CreateQuizProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    <Clock01Icon className="w-4 h-4" />
+                    <ClockIcon className="w-4 h-4" />
                     Temps par défaut (secondes)
                   </label>
                   <Input

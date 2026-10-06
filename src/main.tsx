@@ -3,9 +3,11 @@ import { createRoot } from 'react-dom/client'
 import '@fontsource-variable/dm-sans'
 import './index.css'
 import App from './App.tsx'
+import { isDemo } from './demo'
+import { DemoApp } from './demo/DemoApp.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    {isDemo ? <DemoApp /> : <App />}
   </StrictMode>,
 )

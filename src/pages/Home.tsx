@@ -21,16 +21,68 @@ import {
   RocketIcon,
   CheckmarkCircle02Icon,
   Cancel01Icon,
+  Download04Icon,
+  InformationCircleIcon,
 } from "hugeicons-react";
+import { REPO_URL } from "@/demo";
 
-interface HomeProps {
-  onCreate: () => void;
-  onJoin: () => void;
+type HomeActionsProps =
+  | { onCreate: () => void; onJoin: () => void }
+  | { onStartDemo: () => void };
+
+type HomeProps = HomeActionsProps & {
   onOpenTerms: () => void;
   onOpenPrivacy: () => void;
+};
+
+function HomeActions(props: HomeActionsProps) {
+  if ("onStartDemo" in props) {
+    return (
+      <div className="flex flex-col sm:flex-row gap-3 md:justify-center w-full sm:w-auto">
+        <CustomButton
+          variant="primary"
+          onClick={() => window.open(REPO_URL, "_blank", "noopener,noreferrer")}
+          icon={<Download04Icon className="w-4 h-4" />}
+          className="w-full sm:w-auto"
+        >
+          Télécharger le code
+        </CustomButton>
+        <CustomButton
+          variant="secondary"
+          onClick={props.onStartDemo}
+          icon={<PlayIcon className="w-4 h-4" />}
+          className="w-full sm:w-auto"
+        >
+          Voir la démo
+        </CustomButton>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col sm:flex-row gap-3 md:justify-center w-full sm:w-auto">
+      <CustomButton
+        variant="primary"
+        onClick={props.onCreate}
+        icon={<PlayIcon className="w-4 h-4" />}
+        className="w-full sm:w-auto"
+      >
+        Créer un quiz
+      </CustomButton>
+      <CustomButton
+        variant="secondary"
+        onClick={props.onJoin}
+        icon={<ArrowRight01Icon className="w-4 h-4" />}
+        className="w-full sm:w-auto"
+      >
+        Rejoindre une partie
+      </CustomButton>
+    </div>
+  );
 }
 
-export function Home({ onCreate, onJoin, onOpenTerms, onOpenPrivacy }: HomeProps) {
+export function Home(props: HomeProps) {
+  const { onOpenTerms, onOpenPrivacy } = props;
   return (
     <div className="min-h-screen bg-background">
       <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
@@ -60,6 +112,15 @@ export function Home({ onCreate, onJoin, onOpenTerms, onOpenPrivacy }: HomeProps
 
       <section className="min-h-[calc(100dvh-4rem)] flex flex-col justify-center px-10 sm:px-8 md:px-6 py-16 md:py-0 md:items-center">
         <div className="max-w-2xl md:mx-auto text-left md:text-center">
+          {"onStartDemo" in props && (
+            <div className="mb-8 inline-flex items-start gap-2 rounded-lg border border-border bg-secondary/40 px-4 py-3 text-left text-sm text-foreground">
+              <InformationCircleIcon className="w-5 h-5 shrink-0 text-[hsl(var(--answer-blue))]" />
+              <p>
+                Version de démonstration — téléchargez le code pour héberger
+                votre propre Quibly
+              </p>
+            </div>
+          )}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground mb-4 leading-tight">
             L'alternative gratuite à Kahoot pour vos quiz.
           </h1>
@@ -68,24 +129,7 @@ export function Home({ onCreate, onJoin, onOpenTerms, onOpenPrivacy }: HomeProps
             partie en temps réel. Un code de 6 caractères et un pseudo suffisent
             pour rejoindre, sans inscription.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:justify-center w-full sm:w-auto">
-            <CustomButton
-              variant="primary"
-              onClick={onCreate}
-              icon={<PlayIcon className="w-4 h-4" />}
-              className="w-full sm:w-auto"
-            >
-              Créer un quiz
-            </CustomButton>
-            <CustomButton
-              variant="secondary"
-              onClick={onJoin}
-              icon={<ArrowRight01Icon className="w-4 h-4" />}
-              className="w-full sm:w-auto"
-            >
-              Rejoindre une partie
-            </CustomButton>
-          </div>
+          <HomeActions {...props} />
         </div>
       </section>
 
@@ -374,24 +418,7 @@ export function Home({ onCreate, onJoin, onOpenTerms, onOpenPrivacy }: HomeProps
             Passez à Quibly, l'alternative gratuite à Kahoot. Créez un quiz,
             partagez un code et jouez en direct en quelques clics.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:justify-center w-full sm:w-auto">
-            <CustomButton
-              variant="primary"
-              onClick={onCreate}
-              icon={<PlayIcon className="w-4 h-4" />}
-              className="w-full sm:w-auto"
-            >
-              Créer un quiz
-            </CustomButton>
-            <CustomButton
-              variant="secondary"
-              onClick={onJoin}
-              icon={<ArrowRight01Icon className="w-4 h-4" />}
-              className="w-full sm:w-auto"
-            >
-              Rejoindre une partie
-            </CustomButton>
-          </div>
+          <HomeActions {...props} />
         </div>
       </section>
 

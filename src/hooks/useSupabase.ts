@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
+import type { RealtimeChannel } from '@supabase/supabase-js'
+import { isDemo, useDemoSupabase } from '@/demo'
 import type { PlayerAnswerRecord } from '@/lib/streaks'
-import { supabase, type Quiz, type Question, type PublicAnswer, type GameSession, type Player } from '@/lib/supabase'
+import { getSupabase, type Quiz, type Question, type PublicAnswer, type GameSession, type Player } from '@/lib/supabase'
 
 type PublicQuiz = Quiz & { questions: (Question & { answers: PublicAnswer[] })[] }
 
@@ -42,13 +44,13 @@ const generateQuizCode = () => {
   return Array.from(values, (value) => QUIZ_CODE_CHARS[value % QUIZ_CODE_CHARS.length]).join('')
 }
 
-export function useSupabase() {
+function useLiveSupabase() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   const [userId, setUserId] = useState<string | null>(null)
 
   const ensureAuth = useCallback(async () => {
-    const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
+    const { data: sessionData, error: sessionError } = await getSupabase().auth.getSession()
     if (sessionError) throw sessionError
 
     const existingUserId = sessionData.session?.user?.id
@@ -57,7 +59,7 @@ export function useSupabase() {
       return existingUserId
     }
 
-    const { data, error: signInError } = await supabase.auth.signInAnonymously()
+    const { data, error: signInError } = await getSupabase().auth.signInAnonymously()
     if (signInError) throw signInError
 
     const signedInUserId = data.user?.id
@@ -80,7 +82,7 @@ export function useSupabase() {
 
       for (let attempt = 0; attempt < maxAttempts; attempt++) {
         const code = generateQuizCode()
-        const { data, error: quizError } = await supabase
+        const { data, error: quizError } = await getSupabase()
           .from('quizzes')
           .insert([{ title, description, host_id: hostId, code }])
           .select()
@@ -103,7 +105,7 @@ export function useSupabase() {
 
       for (let i = 0; i < questions.length; i++) {
         const q = questions[i]
-        const { data: question, error: questionError } = await supabase
+        const { data: question, error: questionError } = await getSupabase()
           .from('questions')
           .insert([{ 
             quiz_id: quiz.id, 
@@ -126,7 +128,7 @@ export function useSupabase() {
           sort_order: idx
         }))
 
-        const { error: answersError } = await supabase
+        const { error: answersError } = await getSupabase()
           .from('answers')
           .insert(answersToInsert)
 
@@ -138,16 +140,16 @@ export function useSupabase() {
       if (quiz?.id) {
         try {
           if (insertedQuestionIds.length > 0) {
-            await supabase
+            await getSupabase()
               .from('answers')
               .delete()
               .in('question_id', insertedQuestionIds)
-            await supabase
+            await getSupabase()
               .from('questions')
               .delete()
               .in('id', insertedQuestionIds)
           }
-          await supabase
+          await getSupabase()
             .from('quizzes')
             .delete()
             .eq('id', quiz.id)
@@ -166,7 +168,7 @@ export function useSupabase() {
     setLoading(true)
     try {
       await ensureAuth()
-      const { data, error } = await supabase.rpc('get_quiz_by_code_public', { code_input: code })
+      const { data, error } = await getSupabase().rpc('get_quiz_by_code_public', { code_input: code })
 
       if (error) throw error
       return data as PublicQuiz | null
@@ -182,13 +184,13 @@ export function useSupabase() {
     setLoading(true)
     try {
       const hostId = await ensureAuth()
-      const { data: quiz } = await supabase
+      const { data: quiz } = await getSupabase()
         .from('quizzes')
         .select('code')
         .eq('id', quizId)
         .single()
 
-      const { data, error } = await supabase
+      const { data, error } = await getSupabase()
         .from('game_sessions')
         .insert([{ 
           quiz_id: quizId, 
@@ -212,7 +214,7 @@ export function useSupabase() {
     setLoading(true)
     try {
       const authUserId = await ensureAuth()
-      const { data, error } = await supabase
+      const { data, error } = await getSupabase()
         .from('players')
         .insert([{ session_id: sessionId, name, is_host: false, user_id: authUserId }])
         .select()
@@ -220,7 +222,7 @@ export function useSupabase() {
 
       if (error) {
         if (error.code === '23505') {
-          const { data: existingPlayer, error: existingError } = await supabase
+          const { data: existingPlayer, error: existingError } = await getSupabase()
             .from('players')
             .select('*')
             .eq('session_id', sessionId)
@@ -245,7 +247,7 @@ export function useSupabase() {
 
   const getPlayers = useCallback(async (sessionId: string) => {
     await ensureAuth()
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('players')
       .select('*')
       .eq('session_id', sessionId)
@@ -257,7 +259,7 @@ export function useSupabase() {
 
   const getSessionById = useCallback(async (sessionId: string) => {
     await ensureAuth()
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('game_sessions')
       .select('*')
       .eq('id', sessionId)
@@ -269,7 +271,7 @@ export function useSupabase() {
 
   const getPlayerById = useCallback(async (playerId: string) => {
     await ensureAuth()
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('players')
       .select('*')
       .eq('id', playerId)
@@ -281,7 +283,7 @@ export function useSupabase() {
 
   const getPlayerBySession = useCallback(async (sessionId: string) => {
     const authUserId = await ensureAuth()
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('players')
       .select('*')
       .eq('session_id', sessionId)
@@ -294,7 +296,7 @@ export function useSupabase() {
 
   const removePlayer = useCallback(async (playerId: string) => {
     const authUserId = await ensureAuth()
-    const { error } = await supabase
+    const { error } = await getSupabase()
       .from('players')
       .delete()
       .eq('id', playerId)
@@ -305,7 +307,7 @@ export function useSupabase() {
 
   const updateSessionStatus = useCallback(async (sessionId: string, status: 'waiting' | 'playing' | 'finished') => {
     await ensureAuth()
-    const { error } = await supabase
+    const { error } = await getSupabase()
       .from('game_sessions')
       .update({ status, updated_at: new Date().toISOString() })
       .eq('id', sessionId)
@@ -336,7 +338,7 @@ export function useSupabase() {
     if (typeof updates.startedAt !== 'undefined') payload.started_at = updates.startedAt
     if (typeof updates.endedAt !== 'undefined') payload.ended_at = updates.endedAt
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
       .from('game_sessions')
       .update(payload)
       .eq('id', sessionId)
@@ -351,7 +353,7 @@ export function useSupabase() {
     timeRemaining: number
   ) => {
     await ensureAuth()
-    const { data, error } = await supabase.rpc('submit_answer', {
+    const { data, error } = await getSupabase().rpc('submit_answer', {
       player_id_input: playerId,
       question_id_input: questionId,
       answer_id_input: answerId,
@@ -365,7 +367,7 @@ export function useSupabase() {
 
   const getWaitingSessionByCode = useCallback(async (code: string) => {
     await ensureAuth()
-    const { data, error } = await supabase.rpc('get_waiting_session_by_code', { code_input: code })
+    const { data, error } = await getSupabase().rpc('get_waiting_session_by_code', { code_input: code })
 
     if (error) throw error
     if (!data) return null
@@ -378,7 +380,7 @@ export function useSupabase() {
 
   const getAnswerStats = useCallback(async (sessionId: string, questionId: string) => {
     await ensureAuth()
-    const { data, error } = await supabase.rpc('get_answer_stats', {
+    const { data, error } = await getSupabase().rpc('get_answer_stats', {
       session_id_input: sessionId,
       question_id_input: questionId
     })
@@ -390,7 +392,7 @@ export function useSupabase() {
   const getPlayerAnswers = useCallback(async (playerIds: string[], questionIds: string[]) => {
     await ensureAuth()
     if (playerIds.length === 0 || questionIds.length === 0) return []
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from('player_answers')
       .select('player_id, question_id, is_correct, answered_at')
       .in('player_id', playerIds)
@@ -409,7 +411,7 @@ export function useSupabase() {
 
   const advanceSessionPhase = useCallback(async (sessionId: string) => {
     await ensureAuth()
-    const { data, error } = await supabase.rpc('advance_session_phase', {
+    const { data, error } = await getSupabase().rpc('advance_session_phase', {
       session_id_input: sessionId
     })
 
@@ -418,14 +420,14 @@ export function useSupabase() {
   }, [ensureAuth])
 
   const subscribeToSession = useCallback((sessionId: string, callback: (payload: { eventType?: string; new?: Record<string, unknown>; old?: Record<string, unknown> }) => void) => {
-    let subscription: ReturnType<typeof supabase.channel> | null = null
+    let subscription: RealtimeChannel | null = null
     let isClosed = false
 
     const start = async () => {
       try {
         await ensureAuth()
         if (isClosed) return
-        subscription = supabase
+        subscription = getSupabase()
           .channel(`session:${sessionId}`, {
             config: {
               broadcast: { ack: false },
@@ -468,7 +470,7 @@ export function useSupabase() {
   const notifyPlayersChanged = useCallback(async (sessionId: string) => {
     try {
       await ensureAuth()
-      const channel = supabase.channel(`session:${sessionId}`, {
+      const channel = getSupabase().channel(`session:${sessionId}`, {
         config: {
           broadcast: { ack: false },
         },
@@ -498,14 +500,14 @@ export function useSupabase() {
   }, [ensureAuth])
 
   const subscribeToGameSession = useCallback((sessionId: string, callback: (payload: { eventType: string; new: Record<string, unknown>; old: Record<string, unknown> }) => void) => {
-    let subscription: ReturnType<typeof supabase.channel> | null = null
+    let subscription: RealtimeChannel | null = null
     let isClosed = false
 
     const start = async () => {
       try {
         await ensureAuth()
         if (isClosed) return
-        subscription = supabase
+        subscription = getSupabase()
           .channel(`game-session:${sessionId}`)
           .on('postgres_changes', {
             event: '*',
@@ -529,7 +531,7 @@ export function useSupabase() {
 
   const deleteGameSession = useCallback(async (sessionId: string) => {
     await ensureAuth()
-    const { error } = await supabase.rpc('delete_game_session', {
+    const { error } = await getSupabase().rpc('delete_game_session', {
       session_id_input: sessionId
     })
 
@@ -563,3 +565,7 @@ export function useSupabase() {
     notifyPlayersChanged
   }
 }
+
+export type SupabaseApi = ReturnType<typeof useLiveSupabase>
+
+export const useSupabase: () => SupabaseApi = isDemo ? useDemoSupabase : useLiveSupabase

@@ -1,9 +1,15 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { isDemo } from '@/demo'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase: SupabaseClient | null = isDemo ? null : createClient(supabaseUrl, supabaseKey)
+
+export const getSupabase = () => {
+  if (!supabase) throw new Error('Supabase is disabled in demo mode')
+  return supabase
+}
 
 export type Quiz = {
   id: string

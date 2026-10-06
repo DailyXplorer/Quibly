@@ -54,5 +54,12 @@ pnpm preview
 pnpm lint
 ```
 
+### Mode démonstration
+`VITE_DEMO_MODE=true` produit une vitrine sans backend : le client Supabase n'est jamais créé, la création et la connexion à une partie sont désactivées, et « Voir la démo » déroule un quiz d'exemple en local. Sans cette variable (par défaut), l'application complète est construite.
+```
+VITE_DEMO_MODE=true pnpm build
+```
+Sur Vercel, définir `VITE_DEMO_MODE=true` dans les variables d'environnement du projet.
+
 ## Licence
 MIT. Voir le fichier `LICENSE`.

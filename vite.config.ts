@@ -11,4 +11,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      treeshake: {
+        // Lets the demo build drop the unused App routes (create, join, play).
+        manualPureFunctions: ["lazy"],
+      },
+    },
+  },
 })

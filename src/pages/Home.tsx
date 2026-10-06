@@ -43,7 +43,7 @@ function HomeActions(props: HomeActionsProps) {
           variant="primary"
           onClick={() => window.open(REPO_URL, "_blank", "noopener,noreferrer")}
           icon={<DownloadSimpleIcon className="w-4 h-4" />}
-          className="w-full sm:w-auto"
+          className="w-full sm:w-64"
         >
           Télécharger le code
         </CustomButton>
@@ -51,7 +51,7 @@ function HomeActions(props: HomeActionsProps) {
           variant="secondary"
           onClick={props.onStartDemo}
           icon={<PlayIcon className="w-4 h-4" />}
-          className="w-full sm:w-auto"
+          className="w-full sm:w-64"
         >
           Voir la démonstration
         </CustomButton>
@@ -85,7 +85,7 @@ export function Home(props: HomeProps) {
   const { onOpenTerms, onOpenPrivacy } = props;
   return (
     <div className="min-h-screen bg-background">
-      <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-border bg-[var(--background)] sticky top-0 z-50">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <a href="/" aria-label="Recharger Quibly">
             <img

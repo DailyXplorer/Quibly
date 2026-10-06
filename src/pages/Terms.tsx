@@ -23,7 +23,7 @@ const paragraphs = [
 export function Terms({ onBack, onOpenTerms, onOpenPrivacy }: TermsProps) {
   return (
     <div className="min-h-screen bg-background">
-      <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-border bg-[var(--background)] sticky top-0 z-50">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <a href="/" aria-label="Recharger Quibly">
             <img

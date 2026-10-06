@@ -107,7 +107,7 @@ function Tour({ onExit }: { onExit: () => void }) {
         )}
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 backdrop-blur-sm">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-[var(--background)]">
         <div className="container mx-auto max-w-4xl px-6 py-3 flex items-center justify-between gap-3">
           <div className="min-w-0 text-sm">
             <p className="font-medium text-foreground">

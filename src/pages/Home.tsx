@@ -53,7 +53,7 @@ function HomeActions(props: HomeActionsProps) {
           icon={<PlayIcon className="w-4 h-4" />}
           className="w-full sm:w-auto"
         >
-          Voir la démo
+          Voir la démonstration
         </CustomButton>
       </div>
     );
